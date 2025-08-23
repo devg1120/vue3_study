@@ -12,6 +12,7 @@ import Test10 from "./test_case/Test10.vue"
 import Test11 from "./test_case/Test11.vue"
 import Test12 from "./test_case/Test12.vue"
 import Test13 from "./test_case/Test13.vue"
+import Test14 from "./test_case/Test14.vue"
 
 
 
@@ -33,6 +34,7 @@ import Test13 from "./test_case/Test13.vue"
   <Test11 />
   <Test12 />
   <Test13 />
+  <Test14 />
 
 </template>
 
