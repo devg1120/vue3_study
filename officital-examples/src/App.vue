@@ -13,6 +13,7 @@ import Test11 from "./test_case/Test11.vue"
 import Test12 from "./test_case/Test12.vue"
 import Test13 from "./test_case/Test13.vue"
 import Test14 from "./test_case/Test14.vue"
+import Test15 from "./test_case/Test15.vue"
 
 
 
@@ -35,6 +36,8 @@ import Test14 from "./test_case/Test14.vue"
   <Test12 />
   <Test13 />
   <Test14 />
+  <p class="header" > Vue3 examples  ADVANCE    </p>
+  <Test15 />
 
 </template>
 
