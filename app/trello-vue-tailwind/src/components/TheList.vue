@@ -2,16 +2,19 @@
 	<div @drop="onDrop($event, list.id)" class="flex max-h-full w-72 flex-col rounded-md bg-gray-200">
 		<!-- List Title -->
 		<div class="flex items-center justify-between px-3 py-2">
-			<button class="grid h-8 w-8 place-content-center rounded-md hover:bg-gray-300" @click="shiftLeftList(list.id)">
+			<button class="grid h-8 w-5 place-content-center rounded-md hover:bg-gray-300" @click="shiftLeftList(list.id)">
 				<ArrowCircleLeftIcon class="h-5 w-5 text-gray-400" />
 			</button>
-			<h3 class="text-sm font-semibold text-gray-700">{{ list.title }}</h3>
-			<button class="grid h-8 w-8 place-content-center rounded-md hover:bg-gray-300" @click="removeList(list.id)">
-				<XIcon class="h-5 w-5 text-gray-400" />
-			</button>
-			<button class="grid h-8 w-8 place-content-center rounded-md hover:bg-gray-300" @click="shiftRightList(list.id)">
-				<ArrowCircleRightIcon class="h-5 w-5 text-gray-400" />
-			</button>
+			<h3 class="text-sm font-semibold  text-left text-gray-700">{{ list.title }}</h3>
+		        <div class="flex items-center justify-last ">
+		        	<h3 class="text-sm font-semibold  text-left text-gray-400">{{ list.items.length }}</h3>
+		        	<button class="grid h-8 w-8 place-content-center rounded-md hover:bg-gray-300" @click="removeList(list.id)">
+		        		<XIcon class="h-5 w-5 text-gray-400" />
+		        	</button>
+		        	<button class="grid h-8 w-5 place-content-center rounded-md hover:bg-gray-300" @click="shiftRightList(list.id)">
+		        		<ArrowCircleRightIcon class="h-5 w-5 text-gray-400" />
+		        	</button>
+		        </div>
 		</div>
 
 		<!-- List Cards -->
