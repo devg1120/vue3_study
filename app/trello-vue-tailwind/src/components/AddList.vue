@@ -53,12 +53,21 @@
 									<!-- GUSA -->
 								        <p>&nbsp;</p>
 								        <p> insert index</p>
+									<!--
 									<input
 										v-model="list.index"
 										type="text"
 										placeholder="Enter Index..."
-										class="form-input w-8 rounded"
+										class="form-input w-20 rounded"
 									/>
+									-->
+                                                                        <select v-model="list.index">
+                                                                          <option disabled value="">Please select one</option>
+                                                                              <option v-for="(value, key) in getAllList()" :value="value">
+                                                                                {{ key }}
+                                                                              </option>
+                                                                        </select>
+
 									<div class="mt-4">
 										<div>
 											<button
@@ -93,6 +102,8 @@ import { ref, reactive } from "vue";
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay, DialogTitle } from "@headlessui/vue";
 import { useBoardStore } from "@/stores/board";
 
+const selected = ref('A')    
+
 // Store
 const boardStore = useBoardStore();
 
@@ -113,6 +124,13 @@ let list = reactive({
 
 //let insert_index = -2;
 
+/*
+let selectableItems= {
+          foo: 1,
+          bar: 2
+        }
+*/
+
 function newList() {
      if (list.index == '-') {
         addNewList();
@@ -121,6 +139,23 @@ function newList() {
      }
 }
 
+function getAllList() {
+     let _list = boardStore.getAllList();
+     let _dict = {};
+     let i = 0;
+     for ( i = 0; i < _list.length; i++) {
+       _dict[_list[i].title] = i + 1;
+     }
+     _dict["-- Last --"] = i + 1;
+     return _dict;
+      /*
+      return {
+          foo: 1,
+          bar: 2,
+          "zoo OK": 3       
+        };
+      */
+}
 function addNewList() {
 	boardStore.addList({ title: list.title });
 	list.title = "";

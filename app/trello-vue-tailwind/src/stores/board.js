@@ -37,11 +37,14 @@ export const useBoardStore = defineStore({
 		},
 	},
 	actions: {
+		getAllList() {                                       // GUSA
+			return this.lists;
+    	        },
 		addList({ title }) {                         
 			this.lists.push(makeList(title));
 		},
 		insertList(  index, { title }) {                      // GUSA
-			this.lists.splice(index,0, makeList(title));
+			this.lists.splice(index -1,0, makeList(title));
 		},
 		removeList({ listId }) {
 			const index = this.lists.findIndex((list) => list.id === listId);
