@@ -3,6 +3,23 @@ import { getItemById, getListById, getListByItemId } from "../utils/board";
 import { makeItem, makeList } from "../utils/board";
 import data from "../api";
 
+function moveAt(array, index, at) {
+    if (index === at || index > array.length -1 || at > array.length - 1) {
+      return array;
+    }
+    
+    const value = array[index];
+    const tail = array.slice(index + 1);
+
+    array.splice(index);
+
+    Array.prototype.push.apply(array, tail);
+
+    array.splice(at, 0, value);
+
+    return array;
+  }
+
 export const useBoardStore = defineStore({
 	id: "board",
 	state: () => ({
@@ -29,6 +46,17 @@ export const useBoardStore = defineStore({
 		removeList({ listId }) {
 			const index = this.lists.findIndex((list) => list.id === listId);
 			this.lists.splice(index, 1);
+		},
+		// GUSA
+		shiftLeftList({ listId }) {
+			const index = this.lists.findIndex((list) => list.id === listId);
+			if ( index == 0 ) return;
+			moveAt(this.lists, index, index  -1);
+		},
+		// GUSA
+		shiftRightList({ listId }) {
+			const index = this.lists.findIndex((list) => list.id === listId);
+			moveAt(this.lists, index, index  +1);
 		},
 		addItem({ listId, title, description, date }) {
 			const list = getListById(this.lists, listId);
