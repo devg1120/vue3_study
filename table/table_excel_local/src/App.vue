@@ -28,6 +28,7 @@ function   newRecord () {
     };
 
 function   insertRecord () {
+         console.log("insertRecord");
         const rec = {
             user: 'AA',
             name: 'Norman Morris',
@@ -45,6 +46,32 @@ function   insertRecord () {
         this.grid.insertRecord(rec,N)
     };
 
+
+function  moveUpSelectedRecord() {
+      let N = -1;
+      for (let key in this.grid.selected) {
+             N = parseInt(key)
+	     break;
+      }
+      if (  N == -1)  return;
+      let recs = this.grid.getSelectedRecords();
+      console.log("moveUpSelectedRecord", recs);
+      this.grid.insertRecord(recs[0],N-1)
+      this.delRecord(N+1);
+
+}
+function  moveDownSelectedRecord() {
+      let N = -1;
+      for (let key in this.grid.selected) {
+             N = parseInt(key)
+	     break;
+      }
+      if (  N == -1)  return;
+      let recs = this.grid.getSelectedRecords();
+      console.log("moveDownSelectedRecord", recs);
+      this.grid.insertRecord(recs[0],N+2)
+      this.delRecord(N);
+}
 function  delSelectedRecords() {
 	console.log(this.grid.selected);
 	/*
@@ -77,6 +104,8 @@ function  delRecord(N) {
     <button @click="insertRecord()">insert Row</button>
     <button @click="delSelectedRecords()">del Select Row</button>
     <button @click="delRecord(3)">del 3 Row</button>
+    <button @click="moveUpSelectedRecord()">move Up</button>
+    <button @click="moveDownSelectedRecord()">move Down</button>
 
     <hr>
     <p>Table1</p>
