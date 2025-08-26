@@ -95,7 +95,7 @@
                 :class="{select: typeof selected[pageTop + rowPos] !== 'undefined'}"
                 :style="rowStyle(record)">
               <td class="center-text first-col"
-                  :id="`rid-${record.$id}`"
+                  :id="`rid-${record.rid}`"
                   :class="{
                     hide: noNumCol,
                     error: rowerr[`rid-${record.$id}`]
@@ -974,6 +974,8 @@ export default defineComponent({
       if (field.left) result.left = field.left
       if (record && field.color)
         result.color = (typeof field.color === 'function' ? field.color(record) : field.color)
+      //result.color = "red";
+      //result.backgroundColor  = "yellow";
       return result
     },
     localeDate (d) {
@@ -2727,6 +2729,7 @@ export default defineComponent({
       this.selected = {}
       this.selectedCount = 0
     },
+
     deleteRecord (valueRowPos, isUndo) {
       if (this.currentRowPos === valueRowPos) this.moveNorth()
       const rec = this.modelValue.splice(valueRowPos, 1)[0]
@@ -2741,6 +2744,24 @@ export default defineComponent({
         })
       }, 100)
     },
+
+    deleteRecordNotRefresh (valueRowPos, isUndo) {
+      if (this.currentRowPos === valueRowPos) this.moveNorth()
+      const rec = this.modelValue.splice(valueRowPos, 1)[0]
+	    /*
+      setTimeout(() => {
+        this.lazy(rec, (buf) => {
+          this.$emit('delete', buf)
+          if (!isUndo) this.redo.push(buf.map(t => ({
+            type: 'd',
+            rec: t
+          })))
+          this.refresh()
+        })
+      }, 100)
+	    */
+    },
+
     async updateCell (row, field, newVal, isUndo) {
       switch(row.constructor.name) {
         case 'String': // $id

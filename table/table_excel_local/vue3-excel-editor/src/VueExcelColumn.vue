@@ -231,6 +231,11 @@ export default {
           this._format = 'html'
           style.textAlign = 'center'
           break
+        case 'html':
+          //this._color = 'white'
+          //this._bgcolor = 'blue'
+          this._format = 'html'
+          break
         default:
           throw new Error('VueExcelColumn: Not supported type:' + this.type)
       }
