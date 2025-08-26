@@ -104,15 +104,7 @@
                   @mouseover="numcolMouseOver"
                   @click="rowLabelClick">
                 <span v-html="recordLabel(pageTop + rowPos + 1, record)"></span>
-              
-<div class="row-sep"
-    @mousedown="rowSepMouseDown"
-    @mouseover="rowSepMouseOver"
-    @mouseout="rowSepMouseOut">
-  <div class="add-row-btn"> + </div>
-</div>
               </td>
-
               <td v-for="(item, p) in fields"
                   v-show="!item.invisible"
                   :id="`id-${record.$id}-${item.name}`"
@@ -1684,93 +1676,6 @@ export default defineComponent({
       if (this.remember) localStorage[window.location.pathname + window.location.hash + '.' + this.token] = JSON.stringify(setting)
       this.$emit('setting', setting)
     },
-
-
-    /* *** Rown Separator *******************************************************************************************
-     */
-    rowSepMouseDown (e) {
-      e.preventDefault()
-      e.stopPropagation()
-      if (this.allowAddCol && !e.target.classList.contains('row-sep')) {
-        e.target.style.display = 'none'
-        const me = e.target.parentElement.parentElement
-        const pos = Array.from(me.parentElement.children).findIndex(td => td === me)
-        this.insertColumn(pos)
-      }
-      this.focused = false
-      //const getStyleVal = (elm, css) => {
-      //  window.getComputedStyle(elm, null).getPropertyValue(css)
-      //}
-      this.sep = {}
-      this.sep.curRow = e.target.parentElement.parentElement;
-      this.sep.pageY = e.pageY
-      let padding = 0
-	    /*
-      if (getStyleVal(this.sep.curCol, 'box-sizing') !== 'border-box') {
-        const padLeft = getStyleVal(this.sep.curCol, 'padding-left')
-        const padRight = getStyleVal(this.sep.curCol, 'padding-right')
-        if (padLeft && padRight)
-          padding = parseInt(padLeft) + parseInt(padRight)
-      }
-	    */
-      this.sep.curRowHeight = e.target.parentElement.offsetHeight - padding
-      // if (this.sep.nxtCol)
-      //   this.sep.nxtColWidth = this.sep.nxtCol.offsetWidth - padding
-      window.addEventListener('mousemove', this.rowSepMouseMove)
-      window.addEventListener('mouseup', this.rowSepMouseUp)
-    },
-    rowSepMouseOver (e) {
-      if (e.target.classList.contains('row-sep')) {
-        //e.target.style.borderRight = '5px solid #cccccc'
-        //e.target.style.height = this.systable.getBoundingClientRect().height + 'px'
-        //if (this.allowAddCol)
-        console.log(this.allowAddCol)
-        //  e.target.children[0].style.display = 'block'
-        e.target.style.borderBottom = '5px solid #cccccc'
-        e.target.style.width = this.systable.getBoundingClientRect().width + 'px'
-        //if (this.allowAddCol)
-        //   e.target.children[0].style.display = 'block'
-      }
-      else {
-        // add-col-btn
-        //if (this.addColBtnTimeout) clearTimeout(this.addColBtnTimeout)
-        //if (this.allowAddCol)
-        //  e.target.style.display = 'block'
-      }
-    },
-    rowSepMouseOut (e) {
-      if (e.target.classList.contains('row-sep')) {
-        e.target.style.borderBottom = '5px solid transparent'
-        e.target.style.width = '100%'
-        //this.addColBtnTimeout = setTimeout(() => {
-        //  e.target.children[0].style.display = 'none'
-        //}, 500)
-      }
-      else {
-        // add-col-btn
-          e.target.style.display = 'none'
-      }
-    },
-    rowSepMouseMove (e) {
-      if (!this.sep || !this.sep.curRow) return
-      const diffY = e.pageY - this.sep.pageY
-      // this.sep.curCol.style.width = (this.sep.curColWidth + diffX) + 'px'
-      const newHeight = (this.sep.curRowHeight + diffY) + 'px'
-      this.sep.curRow.style.height = newHeight
-      //this.sep.curField.height = newHeight
-      this.lazy(this.calStickyLeft, 200)
-    },
-    rowSepMouseUp (e) {
-      e.preventDefault()
-      e.stopPropagation()
-      delete this.sep
-      window.removeEventListener('mousemove', this.colSepMouseMove)
-      window.removeEventListener('mouseup', this.colSepMouseUp)
-      const setting = this.getSetting()
-      if (this.remember) localStorage[window.location.pathname + window.location.hash + '.' + this.token] = JSON.stringify(setting)
-      this.$emit('setting', setting)
-    },
-
 
     /* *** Finder *******************************************************************************************
      */
@@ -3567,44 +3472,6 @@ a:disabled {
 .add-col-btn:hover {
   background-color: #7777;
 }
-
-/********  start  *********/
-.row-sep {
-  position: absolute;
-  bottom: 0;
-  /* right: 0;*/
-  left: 0;
-  border-bottom: 5px solid transparent;
-  height: 5px;
-  cursor: row-resize;
-  width: 100%;
-  z-index: 15;
-}
-/*
-.add-row-btn {
-  display: none;
-  position: absolute;
-  top: 12px;
-  right: 8px;
-  width: 20px;
-  height: 20px;
-  background-color: #2222;
-  z-index: 15;
-  border: solid 1px #2222;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-}
-*/
-.add-row-btn:hover {
-  background-color: #7777;
-}
-
-/********  end  *********/
-
-
-
-
 .sort-asc-sign {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAMAAADzN3VRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAeUExURQAAAK+np6+qqq+rq62pqa+rq6+rq6+srK+rq6+rq2v5ERwAAAAJdFJOUwAgYHCAv8/f71KXockAAAAJcEhZcwAAFxEAABcRAcom8z8AAABNSURBVChT7clRAoAgCATRtTLq/hcuBEN0j9B8zoNV76j6s37hsh+a+NWknQ3l8pGTAk4KlAwIdVgoYKIREmUYaIaPVnBi0IjDS2cA8AC8JAq/VhDqzAAAAABJRU5ErkJggg==');
   background-repeat: no-repeat;
