@@ -109,7 +109,9 @@
     @mousedown="rowSepMouseDown"
     @mouseover="rowSepMouseOver"
     @mouseout="rowSepMouseOut">
+	<!--
   <div class="add-row-btn"> + </div>
+	-->
 </div>
               </td>
 

@@ -229,6 +229,20 @@ function setStyle() {
         result.color = "red";
         result.backgroundColor  = "lightgreen";
     }
+    if ( record.user == "fg" && item.name == "name") {
+        result.color = "white";
+        result.backgroundColor  = "orange";
+        result.border = "solid 4px black"; 
+    }
+    if ( record.user == "b" && item.name == "phone") {
+        result.color         = "red";
+	result.textAlign     = "right";
+	result.verticalAlign = "top";
+        result.borderTop     = "solid 4px black"; 
+        result.borderBottom  = "solid 4px orange"; 
+        result.borderLeft    = "solid 4px green"; 
+        result.borderRight   = "solid 4px blue"; 
+    }
     return result
  }
 </script>
