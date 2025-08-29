@@ -9,14 +9,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tiptap/extension-image": "^3.3.0",
+    "@tiptap/extension-list": "^3.3.0",
+    "@tiptap/extension-text-style": "^3.3.0",
+    "@tiptap/starter-kit": "^3.3.0",
+    "@tiptap/vue-3": "^3.3.0",
+    "@vuepic/vue-datepicker": "^3.3.0",
+    "@vueup/vue-quill": "^1.2.0",
     "vue": "^3.5.18",
-     "@vuepic/vue-datepicker": "^3.3.0",
     "vuedraggable": "^4.1.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
+    "sass-embedded": "^1.91.0",
     "typescript": "~5.8.3",
     "vite": "^7.1.2",
     "vue-tsc": "^3.0.5"

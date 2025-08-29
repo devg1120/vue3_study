@@ -232,9 +232,10 @@ export default {
           style.textAlign = 'center'
           break
         case 'html':
-          //this._color = 'white'
-          //this._bgcolor = 'blue'
           this._format = 'html'
+          break
+        case 'rte':                      // GUSA
+          this._format = 'rte'
           break
         default:
           throw new Error('VueExcelColumn: Not supported type:' + this.type)

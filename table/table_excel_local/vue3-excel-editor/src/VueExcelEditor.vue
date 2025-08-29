@@ -135,6 +135,25 @@
                   @mouseover="cellMouseOver"
                   @mousemove="cellMouseMove">
                   <template v-if="item.format=='html'"><span v-html="item.toText(record[item.name], record, item, p)" /></template>
+		  
+		  <template v-else-if="item.format=='rte'">  
+		  <!--
+		     <Child v-bind:name="name">
+		       <p>App.vue</p>
+		     </Child>
+
+
+		  <Rte_bubble  />
+		  <Rte_snow  />
+		  -->
+		  
+		  <Rte_snow  />   <!-- GUSA  -->
+		      
+		  <!--
+		      <Tiptap2 />
+		  -->
+		  </template>
+		  
                   <template v-else>{{ item.toText(record[item.name], record, item, p) }}</template>
                 </td>
               <td v-if="vScroller.buttonHeight < vScroller.height" class="last-col"></td>
@@ -300,6 +319,9 @@ import DatePicker from '@vuepic/vue-datepicker'
 import {read, writeFile, utils} from 'xlsx'
 
 import '@vuepic/vue-datepicker/dist/main.css'
+
+import Child from "./child.vue";
+
 
 export default defineComponent({
   components: {
@@ -3716,5 +3738,13 @@ td.hideDuplicate:not(.focus) {
   background-image: none !important;
   color: transparent;
   text-shadow: none;
+}
+.rte {
+ z-index:9999;
+}
+
+.quill_toolbar {
+} 
+.ql-toolbar {
 }
 </style>

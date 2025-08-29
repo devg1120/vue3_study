@@ -3,6 +3,12 @@
 import { ref } from 'vue';
 import  Table1  from './components/Table1.vue';
 
+import  Rte_bubble from './Rte_bubble.vue';
+import  Rte_snow from './Rte_snow.vue';
+
+import  Tiptap from './Tiptap.vue';
+import  Tiptap2 from './Tiptap2.vue';
+
 const grid  = null;
 
 let textarea_data = `
@@ -65,7 +71,8 @@ let   jsondata = [
   {user: 'ra', name: 'Raymond Atom',  phone: '1-456-9981212', gender: 'M', age: 19, birth: '2000-06-11', html: ` ${table_data}`},
   {user: 'a',  name: 'Mary George',   phone: '1-556-1245684', gender: 'F', age: 22, birth: '2002-08-01', html: ` ${textarea_data}`},
   {user: 'b',  name: 'Mary George',   phone: '1-556-1245684', gender: 'F', age: 22, birth: '2002-08-01'},
-  {user: 'c',  name: 'Mary George',   phone: '1-556-1245684', gender: 'F', age: 22, birth: '2002-08-01'},
+  //{user: 'c',  name: 'Mary George',   phone: '1-556-1245684', gender: 'F', age: 22, birth: '2002-08-01', html: '<QuillEditor toolbar="full" />'},
+  {user: 'c',  name: 'Mary George',   phone: '1-556-1245684', gender: 'F', age: 22, birth: '2002-08-01', html: '<Rte/>'},
   {user: 'd',  name: 'Mary George',   phone: '1-556-1245684', gender: 'F', age: 22, birth: '2002-08-01'},
   {user: 'fg', name: 'Mary George',   phone: '1-556-1245684', gender: 'F', age: 22, birth: '2002-08-01'},
   {user: 'kl', name: 'Kenny Linus',   phone: '1-891-2345685', gender: 'M', age: 29, birth: '1990-09-01'}
@@ -218,8 +225,8 @@ function setStyle() {
 }
 
  function cellStyle(record, item) {
-    console.log("record",record);
-    console.log("item", item);
+    //console.log("record",record);
+    //console.log("item", item);
     let result = {}
     if ( record.user == "fg" && item.name == "age") {
         result.color = "green";
@@ -248,6 +255,9 @@ function setStyle() {
 </script>
 
 <template>
+	<!--
+   <RteToolbar />
+	-->
     <vue-excel-editor ref="grid" v-model="jsondata" :cellStyle="cellStyle">
         <vue-excel-column field="user"   label="User ID"       type="string" width="80px"  />
         <vue-excel-column field="name"   label="Name"          type="string" width="150px" />
@@ -256,6 +266,9 @@ function setStyle() {
         <vue-excel-column field="age"    label="Age"           type="number" width="70px" />
         <vue-excel-column field="birth"  label="Date Of Birth" type="date"   width="80px" />
         <vue-excel-column field="html"   label="html"          type="html"   width="300px"   />
+		
+        <vue-excel-column field="rte"    label="rte"           type="rte"    width="400px"   />
+	
     </vue-excel-editor>
     <button @click="newRecord()">append Row</button>
     <button @click="insertRecord()">insert Row</button>
@@ -269,6 +282,13 @@ function setStyle() {
     <p>Table1</p>
     <Table1 />
 
+    <hr>
+    <p>Rte snow</p>
+    <Rte_snow /> 
+    <p>Rte bubble</p>
+    <Rte_bubble /> 
+    <!--<Rte /> -->
+    <!--<Tiptap />-->
 </template>
 
 
@@ -313,4 +333,16 @@ function setStyle() {
   }
 
 */
+#my-toolbar {
+  z-index: 10000;
+}
+
+.ql-picker-options {
+  z-index: 10000;
+}
+
+.ql-picker-item{
+  z-index: 10000;
+}
+
 </style>
