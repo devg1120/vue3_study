@@ -146,8 +146,8 @@
 		  <Rte_bubble  />
 		  <Rte_snow  />
 		  -->
+		  <Rte_bubble  />
 		  
-		  <Rte_snow  />   <!-- GUSA  -->
 		      
 		  <!--
 		      <Tiptap2 />
